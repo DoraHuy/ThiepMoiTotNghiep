@@ -3,23 +3,13 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { motion } from "framer-motion";
-import Script from "next/script";
 import { useEffect } from "react";
-
-declare global {
-  interface Window {
-    Html5Qrcode?: any;
-    openQrScanner?: () => void;
-    closeQrScanner?: () => void;
-    switchCamera?: () => void;
-  }
-}
 
 const content = `
 <header class="bg-primary/95 text-on-primary backdrop-blur-md docked full-width top-0 sticky z-50 border-b border-primary-fixed/30 flat no shadows" data-aos="fade-down">
   <div class="flex justify-between items-center w-full px-margin-x max-w-container-max mx-auto h-20">
     <a class="text-headline-sm font-headline-sm font-bold text-on-primary tracking-tight hover:text-secondary-fixed transition-colors duration-300" href="#">MAI ANH GRADUATION</a>
-    <nav class="hidden md:flex gap-8" data-nav>
+    <nav id="mobileNav" class="hidden md:flex flex-col md:flex-row gap-6 md:gap-8 absolute md:static top-20 left-0 w-full md:w-auto bg-primary/95 md:bg-transparent p-6 md:p-0 shadow-lg md:shadow-none border-b border-primary-fixed/30 md:border-none" data-nav>
       <a class="text-on-primary/80 hover:text-secondary-fixed transition-colors duration-300 text-label-md font-label-md border-b-2 border-transparent pb-1" data-nav-link href="#invitation">Invitation</a>
       <a class="text-on-primary/80 hover:text-secondary-fixed transition-colors duration-300 text-label-md font-label-md border-b-2 border-transparent pb-1" data-nav-link href="#details">Details</a>
       <a class="text-on-primary/80 hover:text-secondary-fixed transition-colors duration-300 text-label-md font-label-md border-b-2 border-transparent pb-1" data-nav-link href="#rsvp">RSVP</a>
@@ -28,7 +18,7 @@ const content = `
     <a class="hidden md:inline-flex items-center justify-center bg-secondary text-on-secondary px-6 py-2.5 rounded-full text-label-md font-label-md hover:bg-secondary-container transition-all duration-300 scale-95 hover:scale-100 active:transition-transform shadow-sm" href="#rsvp">
       RSVP Now
     </a>
-    <button class="md:hidden text-on-primary p-2">
+    <button id="mobileMenuBtn" class="md:hidden text-on-primary p-2">
       <span class="material-symbols-outlined">menu</span>
     </button>
   </div>
@@ -163,38 +153,13 @@ const content = `
                   <circle cx="8" cy="20" r="5" fill="#93c5fd" opacity="0.7"/>
                   <circle cx="20" cy="20" r="6" fill="#fef3c7"/>
                 </svg>
-                <svg width="100" height="100" viewBox="0 0 100 100" style="border:3px solid #1a2a4a;border-radius:8px;background:white;">
-                  <rect x="5" y="5" width="28" height="28" rx="3" fill="#1a2a4a"/>
-                  <rect x="9" y="9" width="20" height="20" rx="2" fill="white"/>
-                  <rect x="13" y="13" width="12" height="12" rx="1" fill="#1a2a4a"/>
-                  <rect x="67" y="5" width="28" height="28" rx="3" fill="#1a2a4a"/>
-                  <rect x="71" y="9" width="20" height="20" rx="2" fill="white"/>
-                  <rect x="75" y="13" width="12" height="12" rx="1" fill="#1a2a4a"/>
-                  <rect x="5" y="67" width="28" height="28" rx="3" fill="#1a2a4a"/>
-                  <rect x="9" y="71" width="20" height="20" rx="2" fill="white"/>
-                  <rect x="13" y="75" width="12" height="12" rx="1" fill="#1a2a4a"/>
-                  <rect x="38" y="5" width="5" height="5" fill="#1a2a4a"/><rect x="46" y="5" width="5" height="5" fill="#1a2a4a"/><rect x="54" y="5" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="13" width="5" height="5" fill="#1a2a4a"/><rect x="54" y="13" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="42" y="21" width="5" height="5" fill="#1a2a4a"/><rect x="50" y="21" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="29" width="5" height="5" fill="#1a2a4a"/><rect x="46" y="29" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="5" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="13" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="21" y="38" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="50" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="62" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="74" y="38" width="5" height="5" fill="#1a2a4a"/><rect x="90" y="38" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="5" y="46" width="5" height="5" fill="#1a2a4a"/><rect x="21" y="46" width="5" height="5" fill="#1a2a4a"/><rect x="42" y="46" width="5" height="5" fill="#1a2a4a"/><rect x="58" y="46" width="5" height="5" fill="#1a2a4a"/><rect x="70" y="46" width="5" height="5" fill="#1a2a4a"/><rect x="82" y="46" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="13" y="54" width="5" height="5" fill="#1a2a4a"/><rect x="29" y="54" width="5" height="5" fill="#1a2a4a"/><rect x="46" y="54" width="5" height="5" fill="#1a2a4a"/><rect x="62" y="54" width="5" height="5" fill="#1a2a4a"/><rect x="78" y="54" width="5" height="5" fill="#1a2a4a"/><rect x="90" y="54" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="62" width="5" height="5" fill="#1a2a4a"/><rect x="54" y="62" width="5" height="5" fill="#1a2a4a"/><rect x="66" y="62" width="5" height="5" fill="#1a2a4a"/><rect x="82" y="62" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="70" width="5" height="5" fill="#1a2a4a"/><rect x="50" y="70" width="5" height="5" fill="#1a2a4a"/><rect x="74" y="70" width="5" height="5" fill="#1a2a4a"/><rect x="90" y="70" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="42" y="78" width="5" height="5" fill="#1a2a4a"/><rect x="58" y="78" width="5" height="5" fill="#1a2a4a"/><rect x="70" y="78" width="5" height="5" fill="#1a2a4a"/><rect x="82" y="78" width="5" height="5" fill="#1a2a4a"/>
-                  <rect x="38" y="86" width="5" height="5" fill="#1a2a4a"/><rect x="54" y="86" width="5" height="5" fill="#1a2a4a"/><rect x="66" y="86" width="5" height="5" fill="#1a2a4a"/><rect x="78" y="86" width="5" height="5" fill="#1a2a4a"/><rect x="90" y="86" width="5" height="5" fill="#1a2a4a"/>
-                </svg>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://thiep-moi-tot-nghiep-r4q5.vercel.app/" alt="QR Code" width="100" height="100" style="border:3px solid #1a2a4a;border-radius:8px;background:white;object-fit:contain;"/>
               </div>
             </div>
             <div class="mt-4 w-full h-2 rounded-full" style="background:linear-gradient(to right,#e9c349,#002546,#e9c349);"></div>
           </div>
         </div>
-        <button onclick="openQrScanner()" class="flex items-center gap-2 text-primary transition-all duration-300 cursor-pointer px-5 py-2.5 rounded-full border-2 font-bold mt-1 hover:bg-primary hover:text-white hover:-translate-y-0.5" style="border-color:#002546;">
-          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
-          <p class="text-label-md font-label-md font-bold uppercase tracking-wider">Quét mã để truy cập</p>
-        </button>
+
       </div>
       <div class="flex flex-col gap-8" data-aos="fade-left" data-aos-delay="180">
         <div>
@@ -307,55 +272,7 @@ const content = `
     </p>
   </div>
 </footer>
-<div id="qrModal" class="fixed inset-0 z-100 flex items-center justify-center p-4" style="display:none!important;">
-  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeQrScanner()"></div>
-  <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden z-10">
-    <div class="flex items-center justify-between px-6 py-4" style="background:linear-gradient(to right,#002546,#0d3b66);">
-      <div class="flex items-center gap-2 text-white">
-        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">qr_code_scanner</span>
-        <h3 class="font-bold text-lg tracking-wide">Quét Mã QR</h3>
-      </div>
-      <button onclick="closeQrScanner()" class="text-white/70 hover:text-white transition-colors">
-        <span class="material-symbols-outlined text-[28px]">close</span>
-      </button>
-    </div>
-    <div class="h-1 w-full" style="background:linear-gradient(to right,#002546,#e9c349,#002546);"></div>
-    <div class="p-6">
-      <div id="qrStatus" class="mb-4 text-center text-sm font-medium text-on-surface-variant">
-        Đang khởi động camera...
-      </div>
-      <div class="relative rounded-xl overflow-hidden bg-black" style="aspect-ratio:1;">
-        <div id="qrReader" class="w-full h-full"></div>
-        <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <div class="relative w-48 h-48">
-            <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 rounded-tl-lg" style="border-color:#e9c349;"></div>
-            <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 rounded-tr-lg" style="border-color:#e9c349;"></div>
-            <div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 rounded-bl-lg" style="border-color:#e9c349;"></div>
-            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 rounded-br-lg" style="border-color:#e9c349;"></div>
-            <div id="scanLine" class="absolute left-2 right-2 h-0.5 opacity-80" style="background:#e9c349;top:50%;animation:scanAnim 2s ease-in-out infinite;"></div>
-          </div>
-        </div>
-      </div>
-      <div id="qrResult" class="mt-4 hidden">
-        <div class="rounded-xl border-2 p-4 text-center" style="border-color:#e9c349;background:#fffbeb;">
-          <p class="text-xs font-bold uppercase tracking-wider mb-1" style="color:#735c00;">Kết quả quét</p>
-          <p id="qrResultText" class="text-base font-semibold break-all" style="color:#002546;"></p>
-          <a id="qrResultLink" href="#" target="_blank" class="mt-2 inline-flex items-center gap-1 text-sm font-bold underline" style="color:#002546;display:none;">
-            <span class="material-symbols-outlined text-[16px]">open_in_new</span> Mở liên kết
-          </a>
-        </div>
-      </div>
-      <div class="mt-4 flex gap-3 justify-center">
-        <button id="btnSwitchCam" onclick="switchCamera()" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold border-2 transition-all hover:bg-primary hover:text-white" style="border-color:#002546;color:#002546;display:none;">
-          <span class="material-symbols-outlined text-[18px]">flip_camera_ios</span> Đổi camera
-        </button>
-        <button onclick="closeQrScanner()" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white transition-all hover:opacity-90" style="background:#002546;">
-          <span class="material-symbols-outlined text-[18px]">close</span> Đóng
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+
 `;
 
 export default function Home() {
@@ -366,10 +283,6 @@ export default function Home() {
       once: true,
       offset: 80,
     });
-
-    let html5QrCode: any = null;
-    let currentCameraIndex = 0;
-    let availableCameras: any[] = [];
 
     const navLinks = Array.from(
       document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")
@@ -410,123 +323,30 @@ export default function Home() {
       setActiveLink(current);
     };
 
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    const toggleMobileMenu = () => {
+      if (mobileNav) {
+        mobileNav.classList.toggle("hidden");
+        mobileNav.classList.toggle("flex");
+      }
+    };
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+    }
+
     const handleNavClick = (event: Event) => {
       const target = event.currentTarget as HTMLAnchorElement | null;
       const hash = target?.getAttribute("href");
       if (hash?.startsWith("#")) {
         setActiveLink(hash);
+        if (window.innerWidth < 768 && mobileNav && !mobileNav.classList.contains("hidden")) {
+          mobileNav.classList.add("hidden");
+          mobileNav.classList.remove("flex");
+        }
       }
-    };
-
-    const setQrStatus = (message: string) => {
-      const status = document.getElementById("qrStatus");
-      if (status) {
-        status.textContent = message;
-      }
-    };
-
-    const openQrScanner = () => {
-      const modal = document.getElementById("qrModal");
-      if (!modal) return;
-      modal.style.display = "flex";
-      document.getElementById("qrResult")?.classList.add("hidden");
-      setQrStatus("Đang khởi động camera...");
-      startScanner();
-    };
-
-    const closeQrScanner = () => {
-      const modal = document.getElementById("qrModal");
-      if (modal) {
-        modal.style.display = "none";
-      }
-      if (html5QrCode) {
-        html5QrCode.stop().catch(() => { });
-        html5QrCode = null;
-      }
-    };
-
-    const startWithCamera = (cameraId: string) => {
-      if (!window.Html5Qrcode) {
-        setQrStatus("Thư viện quét QR chưa sẵn sàng.");
-        return;
-      }
-      setQrStatus("Hướng camera vào mã QR...");
-      html5QrCode
-        .start(
-          cameraId,
-          { fps: 15, qrbox: { width: 220, height: 220 }, aspectRatio: 1.0 },
-          (decodedText: string) => {
-            const status = document.getElementById("qrStatus");
-            if (status) {
-              status.innerHTML = '<span style="color:#16a34a;">✓ Quét thành công!</span>';
-            }
-            const resultText = document.getElementById("qrResultText");
-            if (resultText) {
-              resultText.textContent = decodedText;
-            }
-            const resultBox = document.getElementById("qrResult");
-            resultBox?.classList.remove("hidden");
-            const linkBtn = document.getElementById("qrResultLink") as HTMLAnchorElement | null;
-            if (linkBtn) {
-              if (/^https?:\/\//i.test(decodedText)) {
-                linkBtn.href = decodedText;
-                linkBtn.style.display = "inline-flex";
-              } else {
-                linkBtn.style.display = "none";
-              }
-            }
-            html5QrCode.stop().catch(() => { });
-          },
-          () => { }
-        )
-        .catch(() => {
-          setQrStatus("Không thể mở camera. Thử đổi camera khác.");
-        });
-    };
-
-    const startScanner = () => {
-      if (!window.Html5Qrcode) {
-        setQrStatus("Thư viện quét QR chưa sẵn sàng.");
-        return;
-      }
-      if (html5QrCode) {
-        html5QrCode.stop().catch(() => { });
-      }
-      html5QrCode = new window.Html5Qrcode("qrReader");
-
-      window.Html5Qrcode.getCameras()
-        .then((cameras: any[]) => {
-          if (!cameras || cameras.length === 0) {
-            setQrStatus("Không tìm thấy camera.");
-            return;
-          }
-          availableCameras = cameras;
-          const backCam = cameras.find((camera) =>
-            /back|rear|environment/i.test(camera.label)
-          );
-          currentCameraIndex = backCam ? cameras.indexOf(backCam) : cameras.length - 1;
-          const switchButton = document.getElementById("btnSwitchCam") as HTMLButtonElement | null;
-          if (switchButton) {
-            switchButton.style.display = cameras.length > 1 ? "inline-flex" : "none";
-          }
-          startWithCamera(cameras[currentCameraIndex].id);
-        })
-        .catch(() => {
-          setQrStatus("Không thể truy cập camera. Vui lòng cấp quyền.");
-        });
-    };
-
-    const switchCamera = () => {
-      if (availableCameras.length < 2) return;
-      currentCameraIndex = (currentCameraIndex + 1) % availableCameras.length;
-      html5QrCode
-        .stop()
-        .then(() => {
-          startWithCamera(availableCameras[currentCameraIndex].id);
-        })
-        .catch(() => {
-          startWithCamera(availableCameras[currentCameraIndex].id);
-        });
     };
 
     const statusEl = document.getElementById("rsvpStatus");
@@ -598,41 +418,23 @@ export default function Home() {
       submitButton?.removeAttribute("disabled");
     };
 
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeQrScanner();
-      }
-    };
-
-    window.openQrScanner = openQrScanner;
-    window.closeQrScanner = closeQrScanner;
-    window.switchCamera = switchCamera;
-    document.addEventListener("keydown", handleKeydown);
     navLinks.forEach((link) => link.addEventListener("click", handleNavClick));
     formEl?.addEventListener("submit", handleSubmit);
     window.addEventListener("scroll", updateActiveByScroll, { passive: true });
     updateActiveByScroll();
 
     return () => {
-      document.removeEventListener("keydown", handleKeydown);
       navLinks.forEach((link) => link.removeEventListener("click", handleNavClick));
       formEl?.removeEventListener("submit", handleSubmit);
       window.removeEventListener("scroll", updateActiveByScroll);
-      if (html5QrCode) {
-        html5QrCode.stop().catch(() => { });
+      if (mobileMenuBtn) {
+        mobileMenuBtn.removeEventListener("click", toggleMobileMenu);
       }
-      delete window.openQrScanner;
-      delete window.closeQrScanner;
-      delete window.switchCamera;
     };
   }, []);
 
   return (
     <>
-      <Script
-        src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"
-        strategy="afterInteractive"
-      />
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
