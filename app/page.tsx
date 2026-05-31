@@ -93,7 +93,7 @@ const content = `
                 <div class="h-px flex-1" style="background:linear-gradient(to right,transparent,#e9c349,transparent);"></div>
               </div>
               <h2 class="font-black text-2xl md:text-3xl mb-2" style="color:#002546;letter-spacing:0.05em;">THAM DỰ LỄ TỐT NGHIỆP</h2>
-              <p class="text-sm md:text-base mb-6" style="color:#555;">Kính mời mọi người đến với Lễ tốt nghiệp của</p>
+              <p class="text-sm md:text-base mb-6" style="color:#555;">Kính mời mọi người đến với Lễ tốt nghiệp của Mai Anh</p>
               <div class="rounded-xl border mb-5 px-5 py-4 flex flex-col gap-3 text-left" style="border-color:#c3c6d0;background:#f4fafd;">
                 <div class="flex items-start gap-3 text-sm md:text-base">
                   <span style="color:#002546;font-size:20px;flex-shrink:0;">🕐</span>
